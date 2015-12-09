@@ -22,7 +22,7 @@ public class GeocodeView {
 
     private MapModel geoModel;
     private MapModel revGeoModel;
-    private String centerGeoMap = "41.850033, -87.6500523";
+    private String centerGeoMap = "-23.550717006921673, -46.63357400000001";
     private String centerRevGeoMap = "41.850033, -87.6500523";
 
     @PostConstruct

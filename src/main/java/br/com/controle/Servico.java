@@ -4,14 +4,12 @@ import br.com.modelo.GeoLocation;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
  *
  * @author eyvdmw
  */
-@EJB
 @Stateless
 public class Servico {
 
