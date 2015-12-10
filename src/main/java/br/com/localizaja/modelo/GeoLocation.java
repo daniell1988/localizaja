@@ -1,4 +1,4 @@
-package br.com.modelo;
+package br.com.localizaja.modelo;
 
 /**
  *

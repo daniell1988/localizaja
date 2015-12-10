@@ -1,6 +1,6 @@
-package br.com.controle;
+package br.com.localizaja.controle;
 
-import br.com.modelo.GeoLocation;
+import br.com.localizaja.modelo.GeoLocation;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
