@@ -45,26 +45,26 @@
         <h:form prependId="false">
 
             <h3 style="margin-top:0">Cadastro</h3>
-            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="1">
+            <h:panelGrid id="panelGri" columns="2" style="margin-bottom:10px" cellpadding="1">
                 <h:panelGroup>
                     <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="1">
                         <p:outputLabel for="nomeEmpresa" value="Nome da Empresa:" />
-                        <p:inputText id="nomeEmpresa" value="#{cadastroEstabelecimentoMB.nomeEmpresa}"/>
+                        <p:inputText id="nomeEmpresa" value="#{cadastroEstabelecimentoMB.empresa.nomeEmpresa}"/>
                         <br/>
                         <p:outputLabel for="endereco" value="Endereço:" />
-                        <p:inputText id="endereco" value="#{cadastroEstabelecimentoMB.endereco}"/>
+                        <p:inputText id="endereco" value="#{cadastroEstabelecimentoMB.empresa.endereco}"/>
                         <br/>
                         <p:outputLabel for="cidade" value="Cidade:" />
-                        <p:inputText id="cidade" value="#{cadastroEstabelecimentoMB.cidade}" />
+                        <p:inputText id="cidade" value="#{cadastroEstabelecimentoMB.empresa.cidade}" />
                         <br/>
                         <p:outputLabel for="estado" value="Estado:" />
-                        <p:inputText id="estado" value="#{cadastroEstabelecimentoMB.estado}"/>
+                        <p:inputText id="estado" value="#{cadastroEstabelecimentoMB.empresa.estado}"/>
                         <br/>
                         <p:outputLabel for="categoria" value="Categoria:" />
-                        <p:inputText id="categoria" value="#{cadastroEstabelecimentoMB.categoria}"/>
+                        <p:inputText id="categoria" value="#{cadastroEstabelecimentoMB.empresa.categoria}"/>
                         <br/>
-                        <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search" onclick="geocode()" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}" type="button" >
-                            <f:ajax execute="cadadtroButton" render="enderecosBuscados"/>
+                        <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search" onclick="geocode();" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}" type="button" >
+                            <f:ajax execute="cadastroButton" render="enderecosBuscados"/>
                         </p:commandButton>
                         <p:commandButton id="buscaCadastroButton" value="Cadastar" onclick="geocode();" type="button" style="display:none"/>
                     </h:panelGrid>
@@ -77,7 +77,7 @@
 
             </h:panelGrid>
 
-            <h:dataTable id="enderecosBuscados" value="#{cadastroEstabelecimentoMB.resultadoEnderecos}" var="item">
+            <h:dataTable id="enderecosBuscados" value="#{cadastroEstabelecimentoMB.resultadoEnderecos}" var="item" rendered="false">
                 <h:column>
                     <f:facet name="header">Endereco</f:facet>
                     <h:outputText value="#{item.enderecoCompleto}" />
