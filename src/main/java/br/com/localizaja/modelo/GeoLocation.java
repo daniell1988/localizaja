@@ -1,54 +1,26 @@
 package br.com.localizaja.modelo;
 
-/**
- *
- * @author eyvdmw
- */
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class GeoLocation {
 
-    private double latitute;
-
-    private double longitute;
-
-    private String nomeCompleto;
+    private Double latitute;
+    private Double longitute;
+    private String enderecoCompleto;
 
     public GeoLocation() {
     }
 
-    public GeoLocation(double latitute, double longitute, String nomeCompleto) {
+    public GeoLocation(Double latitute, Double longitute, String enderecoCompleto) {
         this.latitute = latitute;
         this.longitute = longitute;
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public double getLatitute() {
-        return latitute;
-    }
-
-    public GeoLocation setLatitute(double latitute) {
-        this.latitute = latitute;
-        return this;
-    }
-
-    public double getLongitute() {
-        return longitute;
-    }
-
-    public GeoLocation setLongitute(double longitute) {
-        this.longitute = longitute;
-        return this;
-    }
-
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public GeoLocation setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-        return this;
+        this.enderecoCompleto = enderecoCompleto;
     }
 
     public GeoLocation build() {
-        return new GeoLocation(latitute, longitute, nomeCompleto);
+        return new GeoLocation(latitute, longitute, enderecoCompleto);
     }
 }
