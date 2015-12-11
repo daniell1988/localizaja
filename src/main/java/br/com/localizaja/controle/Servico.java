@@ -34,7 +34,7 @@ public class Servico {
 
         List<GeocodingResult> resultadoEnderecos = Arrays.asList(results);
         ArrayList<GeoLocation> enderecos = new ArrayList<GeoLocation>();
-        
+
         for (GeocodingResult end : resultadoEnderecos) {
             enderecos.add(new GeoLocation(Double.valueOf(end.geometry.location.lat), Double.valueOf(end.geometry.location.lng), end.formattedAddress));
         }
