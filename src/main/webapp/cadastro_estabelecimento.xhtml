@@ -64,7 +64,7 @@
                             <p:outputLabel for="categoria" value="Categoria:" />
                             <p:inputText id="categoria" value="#{cadastroEstabelecimentoMB.empresa.categoria}"/>
                             <br/>
-                            <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search" onclick="geocode();" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}" type="button" process="formularioPesquisa" update="enderecosBuscados"/>
+                            <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search" onclick="geocode();" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}" process="formularioPesquisa" update="enderecosBuscados"/>
                             <p:commandButton id="buscaCadastroButton" value="Cadastar" onclick="geocode();" type="button" style="display:none"/>
                         </h:panelGrid>
                     </h:panelGroup>
@@ -77,12 +77,13 @@
                 </h:panelGrid>
             </p:outputPanel>
 
-            <h:dataTable id="enderecosBuscados" value="#{cadastroEstabelecimentoMB.resultadoEnderecos}" var="item" >
-                <h:column>
-                    <f:facet name="header">Endereco</f:facet>
-                    <h:outputText value="#{item.enderecoCompleto}" />
-                </h:column>   
-            </h:dataTable>
+            <p:dataTable id="enderecosBuscados" value="#{cadastroEstabelecimentoMB.resultadoEnderecos}" var="item" >
+                <p:column headerText="Endereço">
+                    <p:commandLink value="#{item.enderecoCompleto}" action="">
+                        <f:setPropertyActionListener value="#{item}" target="#{cadastroEstabelecimentoMB.enderecoSelecionado}"/>
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
 
             <br/>
             <br/>

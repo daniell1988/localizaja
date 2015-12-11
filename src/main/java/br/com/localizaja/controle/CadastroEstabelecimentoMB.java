@@ -22,6 +22,7 @@ public class CadastroEstabelecimentoMB {
 
     private List<GeoLocation> resultadoEnderecos;
     private Empresa empresa = new Empresa();
+    private GeoLocation enderecoSelecionado;
 
     
     
@@ -29,11 +30,12 @@ public class CadastroEstabelecimentoMB {
         
         try {
 //            resultadoEnderecos = new ArrayList<GeoLocation>();
-            resultadoEnderecos = Servico.getCoordenadasGeograficas(empresa.getEndereco() + " " + empresa.getCidade() + " " + empresa.getEndereco());
-            System.out.println("eeend: " + empresa.getEndereco());
+            resultadoEnderecos = Servico.getCoordenadasGeograficas(empresa.getEndereco() + " " + empresa.getCidade() + " " + empresa.getEstado());
+//            System.out.println("eeend: " + empresa.getEndereco());
         } catch (Exception ex) {
             resultadoEnderecos = null; 
-            Logger.getLogger(CadastroEstabelecimentoMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroEstabelecimentoMB.class.getName(
+            )).log(Level.SEVERE, null, ex);
         }
 
     }
