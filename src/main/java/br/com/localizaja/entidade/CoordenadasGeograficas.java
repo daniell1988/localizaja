@@ -1,16 +1,20 @@
-package br.com.entidade;
+package br.com.localizaja.entidade;
 
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author leomachadop
  */
+@Entity
+@Table
 public class CoordenadasGeograficas implements Serializable {
 
     @Id
@@ -22,6 +26,14 @@ public class CoordenadasGeograficas implements Serializable {
 
     @Column
     private Double longitute;
+
+    public CoordenadasGeograficas() {
+    }
+
+    public CoordenadasGeograficas(Double latitude, Double longitute) {
+        this.latitude = latitude;
+        this.longitute = longitute;
+    }
 
     public Long getId() {
         return id;

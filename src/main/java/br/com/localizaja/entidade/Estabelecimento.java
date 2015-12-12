@@ -1,6 +1,7 @@
-package br.com.entidade;
+package br.com.localizaja.entidade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -20,18 +21,15 @@ import javax.persistence.Table;
 @Table
 public class Estabelecimento implements Serializable {
 
-    @OneToOne(mappedBy = "estabelecimento")
-    private Seguimento seguimento;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
-    private String cnpj;
+    private String nome;
 
     @Column
-    private String nome;
+    private String telefone;
 
     @OneToOne
     private Endereco endereco;
@@ -39,12 +37,12 @@ public class Estabelecimento implements Serializable {
     @OneToMany
     private List<Seguimento> seguimentos;
 
-    public Seguimento getSeguimento() {
-        return seguimento;
+    public Estabelecimento() {
+        seguimentos = new ArrayList<>();
     }
 
-    public void setSeguimento(Seguimento seguimento) {
-        this.seguimento = seguimento;
+    public void adicionarSeguimento(Seguimento seguimento) {
+        seguimentos.add(seguimento);
     }
 
     public Long getId() {
@@ -53,14 +51,6 @@ public class Estabelecimento implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
     }
 
     public String getNome() {
@@ -85,6 +75,14 @@ public class Estabelecimento implements Serializable {
 
     public void setSeguimentos(List<Seguimento> seguimentos) {
         this.seguimentos = seguimentos;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override

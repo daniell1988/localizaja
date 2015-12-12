@@ -1,4 +1,4 @@
-package br.com.entidade;
+package br.com.localizaja.entidade;
 
 import java.io.Serializable;
 import java.util.Objects;
