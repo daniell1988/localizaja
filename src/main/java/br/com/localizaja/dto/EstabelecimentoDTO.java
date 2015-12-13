@@ -20,6 +20,7 @@ public class EstabelecimentoDTO {
     private String endereco;
     private String cidade;
     private String estado;
+    private String telefone;
     private String categoria;
     private Double latitude;
     private Double longitude;
@@ -28,7 +29,8 @@ public class EstabelecimentoDTO {
         Estabelecimento estabelecimento = new Estabelecimento();
 
         estabelecimento.setNome(nomeEmpresa);
-
+        estabelecimento.setTelefone(telefone);
+        
         for (String nome : categoria.split(",")) {
             Seguimento seguimento = new Seguimento();
             seguimento.setNome(nome);
@@ -99,6 +101,14 @@ public class EstabelecimentoDTO {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
 }

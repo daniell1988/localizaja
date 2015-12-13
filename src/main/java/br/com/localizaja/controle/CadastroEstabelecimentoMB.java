@@ -3,6 +3,7 @@ package br.com.localizaja.controle;
 import br.com.localizaja.servico.Servico;
 import br.com.localizaja.dto.EstabelecimentoDTO;
 import br.com.localizaja.dto.GeoLocation;
+import br.com.localizaja.util.FacesMessageUtil;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,10 +28,14 @@ public class CadastroEstabelecimentoMB {
 
     public void buscarEnderecos() {
         try {
-            resultadoEnderecos = Servico.getCoordenadasGeograficas(empresa.getEndereco() + "," + empresa.getCidade() + "," + empresa.getEstado());
+            resultadoEnderecos = servico.getCoordenadasGeograficas(empresa.getEndereco() + "," + empresa.getCidade() + "," + empresa.getEstado());
+            if (resultadoEnderecos.isEmpty()) {
+                FacesMessageUtil.addMensagemWarn("Endereço não localizado");
+            }
         } catch (Exception ex) {
             resultadoEnderecos = null;
-            Logger.getLogger(CadastroEstabelecimentoMB.class.getName()).log(Level.SEVERE, null, ex);
+            FacesMessageUtil.addMensagemError("Não foi possível obter a localização: " + ex);
+            ex.printStackTrace();
         }
     }
 
@@ -38,9 +43,11 @@ public class CadastroEstabelecimentoMB {
         try {
             empresa.setEndereco(enderecoSelecionado.getEnderecoCompleto());
             servico.salvarEstabelecimento(empresa.toEstabelecimento());
+            FacesMessageUtil.addMensagemInfo(empresa.getNomeEmpresa() + " cadastrada com sucesso!");
             return "/busca_estabelecimento.jsf";
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            FacesMessageUtil.addMensagemError("Não foi possível obter a cadastrar: " + ex);
+            ex.printStackTrace();
         }
         return "/busca_estabelecimento.jsf";
     }

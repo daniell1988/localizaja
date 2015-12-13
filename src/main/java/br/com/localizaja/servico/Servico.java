@@ -6,6 +6,7 @@ import br.com.localizaja.entidade.Estabelecimento;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Servico {
      * @return
      * @throws java.lang.Exception
      */
-    public static ArrayList<GeoLocation> getCoordenadasGeograficas(String endereco) throws Exception {
+    public ArrayList<GeoLocation> getCoordenadasGeograficas(String endereco) throws Exception {
         GeoApiContext context = new GeoApiContext().setApiKey(KEY_MAPS);
         GeocodingResult[] results = GeocodingApi.geocode(context, endereco).await();
 
@@ -45,6 +46,14 @@ public class Servico {
         }
 
         return enderecos;
+    }
+
+    public GeoLocation getEndereco(Double latitude, Double longitude) throws Exception {
+        GeoApiContext context = new GeoApiContext().setApiKey(KEY_MAPS);
+        GeocodingResult[] results = GeocodingApi.reverseGeocode(context, new LatLng(latitude, longitude)).await();
+
+        GeocodingResult result = results[0];
+        return new GeoLocation(result.geometry.location.lat, result.geometry.location.lng, result.formattedAddress);
     }
 
     public void salvarEstabelecimento(Estabelecimento estabelecimento) throws Exception {

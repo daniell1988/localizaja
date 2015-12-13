@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Cadastro de estabelecimento</title>
@@ -46,6 +45,9 @@
                                 <p:outputLabel for="estado" value="Estado:" />
                                 <p:inputText id="estado" value="#{cadastroEstabelecimentoMB.empresa.estado}" required="true" requiredMessage="Estado é obrigatório!"/>
                                 <br/>
+                                <p:outputLabel for="telefone" value="Phone:" />
+                                <p:inputMask id="telefone" value="#{cadastroEstabelecimentoMB.empresa.telefone}" mask="(99)9999-9999"/>
+                                <br/>
                                 <p:outputLabel for="categoria" value="Segmento:" />
                                 <p:inputText id="categoria" value="#{cadastroEstabelecimentoMB.empresa.categoria}" required="true" requiredMessage="Segmento é obrigatório!"/>
                                 <p:watermark for="categoria" value="Separe por ," id="watermark" />
@@ -66,7 +68,7 @@
 
                 <p:dataTable id="enderecosBuscados" value="#{cadastroEstabelecimentoMB.resultadoEnderecos}" var="item" >
                     <p:column headerText="Confirme o Endereço a ser Cadastrado">
-                        <p:commandLink value="#{item.enderecoCompleto}" action="#{cadastroEstabelecimentoMB.cadastrarEndereco()}">
+                        <p:commandLink value="#{item.enderecoCompleto}" action="#{cadastroEstabelecimentoMB.cadastrarEndereco()}" update="mensagens">
                             <f:setPropertyActionListener value="#{item}" target="#{cadastroEstabelecimentoMB.enderecoSelecionado}"/>
                         </p:commandLink>
                     </p:column>

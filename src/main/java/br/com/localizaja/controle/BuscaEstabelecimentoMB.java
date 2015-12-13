@@ -1,12 +1,13 @@
 package br.com.localizaja.controle;
 
+import br.com.localizaja.dto.BuscaEstabelecimentoDTO;
 import br.com.localizaja.servico.Servico;
-import br.com.localizaja.dto.EstabelecimentoDTO;
 import br.com.localizaja.dto.GeoLocation;
+import br.com.localizaja.util.FacesMessageUtil;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.primefaces.event.map.GeocodeEvent;
 
 /**
  *
@@ -16,18 +17,30 @@ import org.primefaces.event.map.GeocodeEvent;
 @ViewScoped
 public class BuscaEstabelecimentoMB {
 
+    @EJB
+    private Servico servico;
+
     private List<GeoLocation> resultadoEnderecos;
-    private EstabelecimentoDTO empresa = new EstabelecimentoDTO();
+    private BuscaEstabelecimentoDTO empresa = new BuscaEstabelecimentoDTO();
     private GeoLocation enderecoSelecionado;
 
-    private int raio;
-    private String segmento;
-    private String enderecoInicial;
-
-    public void buscarEnderecos(GeocodeEvent event) {
+    public void buscarMinhaLocalizacao() {
         try {
-            resultadoEnderecos = Servico.getCoordenadasGeograficas(enderecoInicial);
+            GeoLocation endereco = servico.getEndereco(empresa.getLatitude(), empresa.getLongitude());
+            empresa.setEnderecoOrigem(endereco.getEnderecoCompleto());
         } catch (Exception ex) {
+            FacesMessageUtil.addMensagemError("Não foi possível obter a localização: " + ex);
+            ex.printStackTrace();
+            resultadoEnderecos = null;
+        }
+    }
+
+    public void buscarEnderecos() {
+        try {
+            resultadoEnderecos = servico.getCoordenadasGeograficas(empresa.getEnderecoOrigem());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FacesMessageUtil.addMensagemError("Não foi possível buscar endereços: " + ex);
             resultadoEnderecos = null;
         }
     }
@@ -44,11 +57,11 @@ public class BuscaEstabelecimentoMB {
         this.resultadoEnderecos = resultadoEnderecos;
     }
 
-    public EstabelecimentoDTO getEmpresa() {
+    public BuscaEstabelecimentoDTO getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(EstabelecimentoDTO empresa) {
+    public void setEmpresa(BuscaEstabelecimentoDTO empresa) {
         this.empresa = empresa;
     }
 
@@ -59,29 +72,4 @@ public class BuscaEstabelecimentoMB {
     public void setEnderecoSelecionado(GeoLocation enderecoSelecionado) {
         this.enderecoSelecionado = enderecoSelecionado;
     }
-
-    public int getRaio() {
-        return raio;
-    }
-
-    public void setRaio(int raio) {
-        this.raio = raio;
-    }
-
-    public String getSegmento() {
-        return segmento;
-    }
-
-    public void setSegmento(String segmento) {
-        this.segmento = segmento;
-    }
-
-    public String getEnderecoInicial() {
-        return enderecoInicial;
-    }
-
-    public void setEnderecoInicial(String enderecoInicial) {
-        this.enderecoInicial = enderecoInicial;
-    }
-
 }
