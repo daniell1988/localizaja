@@ -27,27 +27,32 @@
 
         <h:form prependId="false">
 
+            <p:growl id="mensagens" showDetail="true" sticky="true" /> 
+
             <p:fieldset legend="Efetuar cadastro">
                 <p:outputPanel id="formularioCadastro">
                     <h:panelGrid id="panelGridGeral" columns="2" style="margin-bottom:10px" cellpadding="1">
                         <h:panelGroup>
                             <h:panelGrid id="panelGridForm" columns="1" style="margin-bottom:10px" cellpadding="1">
                                 <p:outputLabel for="nomeEmpresa" value="Nome da Empresa:" />
-                                <p:inputText id="nomeEmpresa" value="#{cadastroEstabelecimentoMB.empresa.nomeEmpresa}"/>
+                                <p:inputText id="nomeEmpresa" value="#{cadastroEstabelecimentoMB.empresa.nomeEmpresa}" required="true" requiredMessage="Nome da empresa é obrigatório!"/>
                                 <br/>
                                 <p:outputLabel for="endereco" value="Endereço:" />
-                                <p:inputText id="endereco" value="#{cadastroEstabelecimentoMB.empresa.endereco}"/>
+                                <p:inputText id="endereco" value="#{cadastroEstabelecimentoMB.empresa.endereco}" required="true" requiredMessage="Endereço é obrigatório!"/>
                                 <br/>
                                 <p:outputLabel for="cidade" value="Cidade:" />
-                                <p:inputText id="cidade" value="#{cadastroEstabelecimentoMB.empresa.cidade}" />
+                                <p:inputText id="cidade" value="#{cadastroEstabelecimentoMB.empresa.cidade}" required="true" requiredMessage="Cidade é obrigatório!"/>
                                 <br/>
                                 <p:outputLabel for="estado" value="Estado:" />
-                                <p:inputText id="estado" value="#{cadastroEstabelecimentoMB.empresa.estado}"/>
+                                <p:inputText id="estado" value="#{cadastroEstabelecimentoMB.empresa.estado}" required="true" requiredMessage="Estado é obrigatório!"/>
                                 <br/>
                                 <p:outputLabel for="categoria" value="Segmento:" />
-                                <p:inputText id="categoria" value="#{cadastroEstabelecimentoMB.empresa.categoria}"/>
+                                <p:inputText id="categoria" value="#{cadastroEstabelecimentoMB.empresa.categoria}" required="true" requiredMessage="Segmento é obrigatório!"/>
+                                <p:watermark for="categoria" value="Separe por ," id="watermark" />
                                 <br/>
-                                <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search" onclick="geocode();" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}" process="formularioCadastro" update="enderecosBuscados"/>
+                                <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search"
+                                                 onclick="geocode();" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}"
+                                                 process="formularioCadastro" update="enderecosBuscados, mensagens"/>
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:panelGroup>

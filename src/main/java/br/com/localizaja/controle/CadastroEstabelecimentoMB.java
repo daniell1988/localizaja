@@ -36,6 +36,7 @@ public class CadastroEstabelecimentoMB {
 
     public String cadastrarEndereco() {
         try {
+            empresa.setEndereco(enderecoSelecionado.getEnderecoCompleto());
             servico.salvarEstabelecimento(empresa.toEstabelecimento());
             return "/busca_estabelecimento.jsf";
         } catch (Exception e) {

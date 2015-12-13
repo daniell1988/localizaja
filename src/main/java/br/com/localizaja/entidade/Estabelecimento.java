@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,10 +32,10 @@ public class Estabelecimento implements Serializable {
     @Column
     private String telefone;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Seguimento> seguimentos;
 
     public Estabelecimento() {

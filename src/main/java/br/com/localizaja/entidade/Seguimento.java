@@ -2,6 +2,7 @@ package br.com.localizaja.entidade;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Seguimento implements Serializable {
     @Column
     private String nome;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Estabelecimento estabelecimento;
 
     public Long getId() {
