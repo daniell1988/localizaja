@@ -26,9 +26,6 @@ public class Seguimento implements Serializable {
     @Column
     private String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Estabelecimento estabelecimento;
-
     public Long getId() {
         return id;
     }
@@ -43,14 +40,6 @@ public class Seguimento implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Estabelecimento getEstabelecimento() {
-        return estabelecimento;
-    }
-
-    public void setEstabelecimento(Estabelecimento estabelecimento) {
-        this.estabelecimento = estabelecimento;
     }
 
     @Override

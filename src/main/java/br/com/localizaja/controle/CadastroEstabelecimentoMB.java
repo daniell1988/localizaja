@@ -3,6 +3,7 @@ package br.com.localizaja.controle;
 import br.com.localizaja.servico.Servico;
 import br.com.localizaja.dto.EstabelecimentoDTO;
 import br.com.localizaja.dto.GeoLocation;
+import br.com.localizaja.util.EntityConverter;
 import br.com.localizaja.util.FacesMessageUtil;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,8 +42,10 @@ public class CadastroEstabelecimentoMB {
 
     public String cadastrarEndereco() {
         try {
-            empresa.setEndereco(enderecoSelecionado.getEnderecoCompleto());
-            servico.salvarEstabelecimento(empresa.toEstabelecimento());
+            empresa.setLatitude(enderecoSelecionado.getLatitute());
+            empresa.setLongitude(enderecoSelecionado.getLongitute());
+            empresa.setEnderecoCompleto(enderecoSelecionado.getEnderecoCompleto());
+            servico.salvarEstabelecimento(EntityConverter.toEstabelecimento(empresa));
             FacesMessageUtil.addMensagemInfo(empresa.getNomeEmpresa() + " cadastrada com sucesso!");
             return "/busca_estabelecimento.jsf";
         } catch (Exception ex) {

@@ -5,11 +5,6 @@
  */
 package br.com.localizaja.dto;
 
-import br.com.localizaja.entidade.CoordenadasGeograficas;
-import br.com.localizaja.entidade.Endereco;
-import br.com.localizaja.entidade.Estabelecimento;
-import br.com.localizaja.entidade.Seguimento;
-
 /**
  *
  * @author Daniel
@@ -20,32 +15,11 @@ public class EstabelecimentoDTO {
     private String endereco;
     private String cidade;
     private String estado;
+    private String enderecoCompleto;
     private String telefone;
     private String categoria;
     private Double latitude;
     private Double longitude;
-
-    public Estabelecimento toEstabelecimento() {
-        Estabelecimento estabelecimento = new Estabelecimento();
-
-        estabelecimento.setNome(nomeEmpresa);
-        estabelecimento.setTelefone(telefone);
-        
-        for (String nome : categoria.split(",")) {
-            Seguimento seguimento = new Seguimento();
-            seguimento.setNome(nome);
-            seguimento.setEstabelecimento(estabelecimento);
-            estabelecimento.adicionarSeguimento(seguimento);
-        }
-
-        Endereco end = new Endereco();
-        end.setEnderecoCompleto(endereco);
-        end.setCoordenadasGeograficas(new CoordenadasGeograficas(latitude, longitude));
-        end.setEstabelecimento(estabelecimento);
-        estabelecimento.setEndereco(end);
-
-        return estabelecimento;
-    }
 
     public String getNomeEmpresa() {
         return nomeEmpresa;
@@ -111,4 +85,11 @@ public class EstabelecimentoDTO {
         this.telefone = telefone;
     }
 
+    public String getEnderecoCompleto() {
+        return enderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(String enderecoCompleto) {
+        this.enderecoCompleto = enderecoCompleto;
+    }
 }

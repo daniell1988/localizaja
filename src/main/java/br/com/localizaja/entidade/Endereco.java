@@ -29,23 +29,12 @@ public class Endereco implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private CoordenadasGeograficas coordenadasGeograficas;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Estabelecimento estabelecimento;
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Estabelecimento getEstabelecimento() {
-        return estabelecimento;
-    }
-
-    public void setEstabelecimento(Estabelecimento estabelecimento) {
-        this.estabelecimento = estabelecimento;
     }
 
     public CoordenadasGeograficas getCoordenadasGeograficas() {

@@ -25,14 +25,14 @@ public class CoordenadasGeograficas implements Serializable {
     private Double latitude;
 
     @Column
-    private Double longitute;
+    private Double longitude;
 
     public CoordenadasGeograficas() {
     }
 
-    public CoordenadasGeograficas(Double latitude, Double longitute) {
+    public CoordenadasGeograficas(Double latitude, Double longitude) {
         this.latitude = latitude;
-        this.longitute = longitute;
+        this.longitude = longitude;
     }
 
     public Long getId() {
@@ -51,12 +51,12 @@ public class CoordenadasGeograficas implements Serializable {
         this.latitude = latitude;
     }
 
-    public Double getLongitute() {
-        return longitute;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongitute(Double longitute) {
-        this.longitute = longitute;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     @Override
