@@ -53,7 +53,7 @@
                                 <p:watermark for="categoria" value="Separe por ," id="watermark" />
                                 <br/>
                                 <p:commandButton id="cadastroButton" value="Buscar" icon="ui-icon-search"
-                                                 action="#{cadastroEstabelecimentoMB.buscarEnderecos()}"
+                                                 onclick="geocode();" action="#{cadastroEstabelecimentoMB.buscarEnderecos()}"
                                                  process="formularioCadastro" update="enderecosBuscados, mensagens"/>
                             </h:panelGrid>
                         </h:panelGroup>
