@@ -28,9 +28,17 @@ public class EstabelecimentoDAO {
     public List<Estabelecimento> getEstabelecimentosPorLocalizacao(BigDecimal latitude, BigDecimal longitude, Integer distancia, String... seguimentos) {
         StringBuilder b = new StringBuilder();
         b.append("SELECT * FROM ESTABELECIMENTO EST");
-        b.append(" INNER JOIN ENDERECO ENDERECO            ON (EST.ENDERECO_ID = ENDERECO.ID)");
-        b.append(" INNER JOIN COORDENADASGEOGRAFICAS COORD ON (ENDERECO.COORDENADASGEOGRAFICAS_ID = COORD.ID)");
-        b.append(" WHERE");
+        b.append(" INNER JOIN ENDERECO ENDERECO              ON (EST.ENDERECO_ID = ENDERECO.ID)");
+        b.append(" INNER JOIN COORDENADASGEOGRAFICAS COORD   ON (ENDERECO.COORDENADASGEOGRAFICAS_ID = COORD.ID)");
+        b.append(" INNER JOIN ESTABELECIMENTO_SEGUIMENTO ES  ON (ES.ESTABELECIMENTO_ID = EST.ID)");
+        b.append(" INNER JOIN SEGUIMENTO                 SEG ON (ES.SEGUIMENTOS_ID = SEG.ID)");
+        b.append(" WHERE (");
+
+        for (String seguimento : seguimentos) {
+            b.append("(LOWER(SEG.NOME) LIKE '%").append(seguimento.toLowerCase()).append("%' ) OR");
+        }
+        b.append(" (1 = 1)) AND");
+
         b.append(" (6378.137 * ACOS(COS(RADIANS(COORD.LATITUDE)) * COS(RADIANS(?1)) *");
         b.append(" COS(RADIANS(?2) - RADIANS(COORD.LONGITUDE)) + SIN(RADIANS(COORD.LONGITUDE)) * SIN(RADIANS(?1))) <= ?3)");
 
