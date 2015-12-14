@@ -56,6 +56,34 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/leilao_online_full/ConsultaLeilaoWS.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName>br.com.localizaja.ws</packageName>
+                            <wsdlLocation>http://localhost:8080/leilao_online_full/ConsultaLeilaoWS?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/ConsultaLeilaoWS.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-ConsultaLeilaoWS</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Needed with JAXP 1.5 -->
+                    <vmArgs>
+                        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                    </vmArgs>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
@@ -73,6 +101,16 @@
                 <version>2.1.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>src</directory>
+                            <targetPath>WEB-INF</targetPath>
+                            <includes>
+                                <include>jax-ws-catalog.xml</include>
+                                <include>wsdl/**</include>
+                            </includes>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <plugin>

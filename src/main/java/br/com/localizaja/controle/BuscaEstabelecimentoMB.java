@@ -6,6 +6,9 @@ import br.com.localizaja.servico.Servico;
 import br.com.localizaja.dto.GeoLocation;
 import br.com.localizaja.loaddata.CarregarBanco;
 import br.com.localizaja.util.FacesMessageUtil;
+import br.com.localizaja.ws.ConsultaLeilaoWS;
+import br.com.localizaja.ws.ConsultaLeilaoWS_Service;
+import br.com.localizaja.ws.LeilaoVO;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -89,6 +92,23 @@ public class BuscaEstabelecimentoMB {
         } catch (Exception e) {
         }
         return location;
+    }
+    
+    public void buscarLeilao(){
+        
+        
+        try { // Call Web Service Operation
+            ConsultaLeilaoWS_Service service = new ConsultaLeilaoWS_Service();
+            ConsultaLeilaoWS port = service.getConsultaLeilaoWSPort();
+            // TODO initialize WS operation arguments here
+            java.lang.String nomeCategoria = "";
+            // TODO process result here
+            List<LeilaoVO> result = port.obterLeiloesPorNomeCategoria(nomeCategoria);
+            System.out.println("Result = " + result);
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
+        
     }
 
     public GeoLocation getEnderecoSelecionado() {
