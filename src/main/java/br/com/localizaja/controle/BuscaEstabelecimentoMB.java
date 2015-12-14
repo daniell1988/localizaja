@@ -4,6 +4,7 @@ import br.com.localizaja.dto.BuscaEstabelecimentoDTO;
 import br.com.localizaja.dto.EstabelecimentoDTO;
 import br.com.localizaja.servico.Servico;
 import br.com.localizaja.dto.GeoLocation;
+import br.com.localizaja.loaddata.CarregarBanco;
 import br.com.localizaja.util.FacesMessageUtil;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -13,9 +14,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.event.map.OverlaySelectEvent;
-import org.primefaces.model.map.DefaultMapModel;
-import org.primefaces.model.map.LatLng;
-import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
 /**
@@ -29,6 +27,9 @@ public class BuscaEstabelecimentoMB {
     @EJB
     private Servico servico;
 
+    @EJB
+    private CarregarBanco carregarBanco;
+
     private List<EstabelecimentoDTO> estabelecimentos;
     private BuscaEstabelecimentoDTO buscaEstabelecimentoDTO;
 
@@ -38,6 +39,14 @@ public class BuscaEstabelecimentoMB {
     public void inicia() {
         buscaEstabelecimentoDTO = new BuscaEstabelecimentoDTO();
         buscaEstabelecimentoDTO.setRaio(4);
+    }
+
+    public void carregarBanco() {
+        try {
+            carregarBanco.carrega();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void buscarMinhaLocalizacao() {

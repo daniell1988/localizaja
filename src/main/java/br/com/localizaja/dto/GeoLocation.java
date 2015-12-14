@@ -1,15 +1,17 @@
 package br.com.localizaja.dto;
 
+import java.math.BigDecimal;
+
 public class GeoLocation {
 
-    private Double latitute;
-    private Double longitute;
+    private BigDecimal latitute;
+    private BigDecimal longitute;
     private String enderecoCompleto;
 
     public GeoLocation() {
     }
 
-    public GeoLocation(Double latitute, Double longitute, String enderecoCompleto) {
+    public GeoLocation(BigDecimal latitute, BigDecimal longitute, String enderecoCompleto) {
         this.latitute = latitute;
         this.longitute = longitute;
         this.enderecoCompleto = enderecoCompleto;
@@ -19,19 +21,19 @@ public class GeoLocation {
         return new GeoLocation(latitute, longitute, enderecoCompleto);
     }
 
-    public Double getLatitute() {
+    public BigDecimal getLatitute() {
         return latitute;
     }
 
-    public void setLatitute(Double latitute) {
+    public void setLatitute(BigDecimal latitute) {
         this.latitute = latitute;
     }
 
-    public Double getLongitute() {
+    public BigDecimal getLongitute() {
         return longitute;
     }
 
-    public void setLongitute(Double longitute) {
+    public void setLongitute(BigDecimal longitute) {
         this.longitute = longitute;
     }
 
